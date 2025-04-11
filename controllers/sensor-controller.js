@@ -13,7 +13,7 @@ class SensorController {
     static async addSensorData(req, res, next) {
         try {
             const { temperature, humidity } = req.body
-            await SensorData.create({
+            const newData = await SensorData.create({
                 temperature,
                 humidity
             })
