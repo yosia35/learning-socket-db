@@ -1,4 +1,4 @@
-const { SensorData } = require("./models/index.js")
+const { SensorData } = require('../models')
 
 class SensorController {
     static async getAllSensorData(req, res, next) {
@@ -17,6 +17,11 @@ class SensorController {
                 temperature,
                 humidity
             })
+
+            // Emit data ke semua client
+            const io = req.app.get('io');
+            io.emit('new-sensor-data', newData);
+
             res.status(201).json("Success creating sensor data")
         } catch (err) {
             console.log(err)
