@@ -27,6 +27,15 @@ class SensorController {
             console.log(err)
         }
     }
+    static async deleteAllSensor(req,res,next){
+        try {
+            await SensorData.truncate()
+
+            res.status(200).json("Success to delete all data")
+        } catch (err) {
+            console.log(err)
+        }
+    }
 }
 
 module.exports = SensorController
