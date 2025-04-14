@@ -20,7 +20,12 @@ class SensorController {
 
             // Emit data ke semua client
             const io = req.app.get('io');
-            io.emit('new-sensor-data', newData);
+            if(io){
+                // console.log("emitted: ", newData.dataValues)
+                io.emit('new-sensor-data', newData.dataValues);
+            }else {
+                console.log("failed to emit data")
+            }
 
             res.status(201).json("Success creating sensor data")
         } catch (err) {
